@@ -258,7 +258,7 @@ export default class TemplaterAdapter extends Adapter {
             if (this.adapterApi) {
                 this.ntb.debug('Note Toolbar: Evluating:\n', this.ntb.adapters.utils.formatExpression(expressionToEval));
                 result = await this.adapterApi.parse_template(config, expressionToEval);
-                this.ntb.debug('Note Toolbar: Result:\n', result);
+                this.ntb.debug('| Result:\n', result);
                 result = (result === 'undefined') ? '' : result;
             }
         }
@@ -302,7 +302,7 @@ export default class TemplaterAdapter extends Adapter {
                 if (this.adapterApi) {
                     this.ntb.debug('Note Toolbar: Parsing template:', templateFile);
                     result = await this.adapterApi.read_and_parse_template(config);
-                    this.ntb.debug('Note Toolbar: Result:', result);
+                    this.ntb.debug('| Result:', result);
                 }    
             }
             else {

@@ -204,7 +204,7 @@ export default class JsEngineAdapter extends Adapter {
             };
             this.ntb.debug('Note Toolbar: Evaluating:\n', this.ntb.adapters.utils.formatExpression(expression));
             const execution = await this.adapterApi?.internal.execute(params);
-            this.ntb.debug('Note Toolbar: Result:', execution);
+            this.ntb.debug('| Result:', execution);
             if (execution.functionBuildError) throw execution.functionBuildError;
             if (execution.functionRunError) throw execution.functionRunError;
             result = execution.result as string;
@@ -360,7 +360,7 @@ export default class JsEngineAdapter extends Adapter {
                 container: resultEl,
                 component: component,
             });
-            this.ntb.debug('Note Toolbar: Result:', execution);
+            this.ntb.debug('| Result:', execution);
             if (containerEl) {
                 const renderer = this.adapterApi?.internal.createRenderer(resultEl, activeFilePath, component);
                 await renderer?.render(execution?.result);

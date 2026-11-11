@@ -174,7 +174,7 @@ export default class DataviewAdapter extends Adapter {
             if (this.adapterApi && activeFilePath) {
                 this.ntb.debug('Note Toolbar: Evaluating:\n', this.ntb.adapters.utils.formatExpression(expression));
                 const dvResult: DataviewResult = await this.adapterApi.evaluateInline(expression, activeFilePath);
-                this.ntb.debug("Note Toolbar: Result:\n", dvResult);
+                this.ntb.debug("| Result:\n", dvResult);
                 if (containerEl) {
                     containerEl.empty();
                     await this.adapterApi.renderValue(
@@ -275,7 +275,7 @@ export default class DataviewAdapter extends Adapter {
             this.ntb.debug('Note Toolbar: Executing:', scriptFile);
             // from dv.view: may directly render, in which case it will likely return undefined or null
             result = await Promise.resolve((func as (...args: unknown[]) => unknown)(dataviewLocalApi, args));
-            this.ntb.debug('Note Toolbar: Result:', result);
+            this.ntb.debug('| Result:', result);
             if (result && component) {
                 await this.adapterApi?.renderValue(
                     result,
@@ -322,7 +322,7 @@ export default class DataviewAdapter extends Adapter {
             if (this.adapterApi) {
                 this.ntb.debug('Note Toolbar: Executing:\n', expression);
                 await this.adapterApi?.executeJs(expression, resultEl, component, activeFilePath);
-                this.ntb.debug('Note Toolbar: Result:', resultEl);
+                this.ntb.debug('| Result:', resultEl);
                 if (!containerEl) {
                     const errorEl = resultEl.querySelector('.dataview-error');
                     if (errorEl) {
