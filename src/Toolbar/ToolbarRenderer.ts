@@ -914,10 +914,18 @@ export default class ToolbarRenderer {
 		}
 
 		for (const item of toolbar.items) {
-			// truncate titles that still contain unresolved variables, so long
-			// expressions don't widen the menu (same 24 chars as getItemText)
+			// titles with unresolved variables can't be shown as-is: fall back
+			// to the tooltip if it has none, then to what the item does (as the
+			// toolbar does for accessible names), then to its link or command ID
 			let title = item.label || item.tooltip || '';
-			if (this.ntb.vars.hasVars(title)) title = title.slice(0, 24);
+			if (this.ntb.vars.hasVars(title)) {
+				title = (!this.ntb.vars.hasVars(item.tooltip ?? '') ? (item.tooltip ?? '') : '')
+					|| getItemFallbackName(this.ntb, item)
+					|| (item.linkAttr.type === ItemType.Command && item.linkAttr.commandId
+						? item.linkAttr.commandId
+						: item.link);
+				if (this.ntb.vars.hasVars(title)) title = title.slice(0, 24);
+			}
 			resolvedMenuText.set(item.uuid, {
 				title,
 				resolvedLink: item.link
