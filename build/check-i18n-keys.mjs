@@ -405,7 +405,7 @@ for (const file of languageFiles) {
     if (outOfSync) outOfSyncCount += 1;
 
     if (outOfSync) {
-        console.log(`\x1b[33m[lang] ${lang} is out of sync: ${present.length}/${baseKeys.size} present (${coverage}%), ${missing.length} missing, ${extra.length} extra\x1b[0m`);
+        console.log(`\x1b[33m[lang] ${lang} is out of sync: ${present.length}/${baseKeys.size} present (${coverage}%), ${missing.length} missing or empty, ${extra.length} extra\x1b[0m`);
     } else {
         console.log(`\x1b[32m[lang] ${lang} is in sync with ${baseName} (${present.length}/${baseKeys.size})\x1b[0m`);
     }
